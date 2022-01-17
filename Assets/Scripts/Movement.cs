@@ -43,6 +43,8 @@ public class Movement : MonoBehaviour
 
     void ApplyRotation(Vector3 rotationVector)
     {
+        rigidbody.freezeRotation = true; // freezing rotation from the physics system so we can rotate manually
         transform.Rotate(rotationVector * Time.deltaTime * rotationThrust);
+        rigidbody.freezeRotation = false; // physics system can now take over
     }
 }
