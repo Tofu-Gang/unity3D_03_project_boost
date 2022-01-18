@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    Rigidbody my_rigidbody;
     [SerializeField] float mainThrust = 1000f;
     [SerializeField] float rotationThrust = 100f;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        my_rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidbody.AddRelativeForce(Vector3.up * Time.deltaTime * mainThrust);
+            my_rigidbody.AddRelativeForce(Vector3.up * Time.deltaTime * mainThrust);
         }
     }
 
@@ -43,8 +43,9 @@ public class Movement : MonoBehaviour
 
     void ApplyRotation(Vector3 rotationVector)
     {
-        rigidbody.freezeRotation = true; // freezing rotation from the physics system so we can rotate manually
-        transform.Rotate(rotationVector * Time.deltaTime * rotationThrust);
-        rigidbody.freezeRotation = false; // physics system can now take over
+        Quaternion deltaRotation = Quaternion.Euler(rotationVector * Time.deltaTime * rotationThrust);
+        my_rigidbody.freezeRotation = true; // freezing rotation from the physics system so we can rotate manually
+        my_rigidbody.MoveRotation(my_rigidbody.rotation * deltaRotation);
+        my_rigidbody.freezeRotation = false; // physics system can now take over
     }
 }
