@@ -5,6 +5,9 @@ public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] float crashDelay = 1f;
     [SerializeField] float successDelay = 1f;
+    [SerializeField] AudioClip crash;
+    [SerializeField] AudioClip success;
+    
     AudioSource my_audiosource;
     Movement movementScript;
 
@@ -32,17 +35,18 @@ public class CollisionHandler : MonoBehaviour
 
     void CrashSequence()
     {
-        // TODO: add SFX upon crash
         // TODO: add particle effects upon crash
         my_audiosource.Stop();
+        my_audiosource.PlayOneShot(crash);
         movementScript.enabled = false;
         Invoke("ReloadLevel", crashDelay);
     }
 
     void SuccessSequence()
     {
-        // TODO: add SFX upon success
         // TODO: add particle effects upon success
+        my_audiosource.Stop();
+        my_audiosource.PlayOneShot(success);
         movementScript.enabled = false;
         Invoke("LoadNextLevel", successDelay);
     }
