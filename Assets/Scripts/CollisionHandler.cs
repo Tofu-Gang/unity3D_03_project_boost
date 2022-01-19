@@ -3,6 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float crashDelay = 1f;
+    [SerializeField] float successDelay = 1f;
+    AudioSource my_audiosource;
+    Movement movementScript;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        my_audiosource = GetComponent<AudioSource>();
+        movementScript = GetComponent<Movement>();
+    }
+    
     void OnCollisionEnter(Collision other) {
         switch(other.gameObject.tag)
         {
@@ -10,12 +22,29 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("This is friendly");
                 break;
             case "Finish":
-                LoadNextLevel();
+                SuccessSequence();
                 break;
             default:
-                ReloadLevel();
+                CrashSequence();
                 break;
         }
+    }
+
+    void CrashSequence()
+    {
+        // TODO: add SFX upon crash
+        // TODO: add particle effects upon crash
+        my_audiosource.Stop();
+        movementScript.enabled = false;
+        Invoke("ReloadLevel", crashDelay);
+    }
+
+    void SuccessSequence()
+    {
+        // TODO: add SFX upon success
+        // TODO: add particle effects upon success
+        movementScript.enabled = false;
+        Invoke("LoadNextLevel", successDelay);
     }
 
     void ReloadLevel()
