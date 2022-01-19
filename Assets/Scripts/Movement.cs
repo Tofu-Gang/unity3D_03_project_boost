@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float mainThrust = 1000f;
     [SerializeField] float rotationThrust = 100f;
     [SerializeField] AudioClip mainEngine;
-    
+
     Rigidbody my_rigidbody;
     AudioSource my_audiosource;
 

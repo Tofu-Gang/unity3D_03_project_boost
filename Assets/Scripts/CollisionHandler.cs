@@ -11,6 +11,8 @@ public class CollisionHandler : MonoBehaviour
     AudioSource my_audiosource;
     Movement movementScript;
 
+    bool isTransitioning = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,23 +21,27 @@ public class CollisionHandler : MonoBehaviour
     }
     
     void OnCollisionEnter(Collision other) {
-        switch(other.gameObject.tag)
+        if (!isTransitioning)
         {
-            case "Friendly":
-                Debug.Log("This is friendly");
-                break;
-            case "Finish":
-                SuccessSequence();
-                break;
-            default:
-                CrashSequence();
-                break;
+            switch(other.gameObject.tag)
+            {
+                case "Friendly":
+                    Debug.Log("This is friendly");
+                    break;
+                case "Finish":
+                    SuccessSequence();
+                    break;
+                default:
+                    CrashSequence();
+                    break;
+            }
         }
     }
 
     void CrashSequence()
     {
         // TODO: add particle effects upon crash
+        isTransitioning = true;
         my_audiosource.Stop();
         my_audiosource.PlayOneShot(crash);
         movementScript.enabled = false;
@@ -45,6 +51,7 @@ public class CollisionHandler : MonoBehaviour
     void SuccessSequence()
     {
         // TODO: add particle effects upon success
+        isTransitioning = true;
         my_audiosource.Stop();
         my_audiosource.PlayOneShot(success);
         movementScript.enabled = false;
@@ -55,6 +62,7 @@ public class CollisionHandler : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
+        isTransitioning = false;
     }
 
     void LoadNextLevel()
@@ -68,5 +76,6 @@ public class CollisionHandler : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
+        isTransitioning = false;
     }
 }
