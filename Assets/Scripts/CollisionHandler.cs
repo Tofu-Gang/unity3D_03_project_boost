@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] float crashDelay = 1f;
-    [SerializeField] float successDelay = 1f;
+    [SerializeField] float successDelay = 3f;
     [SerializeField] AudioClip crashAudio;
     [SerializeField] AudioClip successAudio;
     [SerializeField] ParticleSystem crashParticles;
@@ -42,6 +42,11 @@ public class CollisionHandler : MonoBehaviour
 
     void CrashSequence()
     {
+        MeshRenderer[] mesh_renderers = GetComponentsInChildren<MeshRenderer>();
+        foreach(MeshRenderer mesh_renderer in mesh_renderers)
+        {
+            mesh_renderer.enabled = false;
+        }
         isTransitioning = true;
         my_audiosource.Stop();
         my_audiosource.PlayOneShot(crashAudio);

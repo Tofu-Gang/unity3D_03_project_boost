@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainThrust: 1000
   rotationThrust: 100
-  mainEngineAudio: {fileID: 8300000, guid: f9a84df263676c7409bd87456a594863, type: 3}
+  mainEngineAudio: {fileID: 8300000, guid: 208e9f65a73c5e847a591b9c75d9f61c, type: 3}
   mainEngineParticles: {fileID: 6962798787818114302}
   leftThrustParticles: {fileID: 1017877498630245133}
   rightThrustParticles: {fileID: 8953839090805229502}
@@ -585,9 +585,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crashDelay: 1
-  successDelay: 1
-  crashAudio: {fileID: 8300000, guid: cc4994ad4a2818547a01ffd52b19dad3, type: 3}
-  successAudio: {fileID: 8300000, guid: fa7fca1b6876f72408fb62500e7ba547, type: 3}
+  successDelay: 3
+  crashAudio: {fileID: 8300000, guid: 8630c3dac5bcab447b1d9ada611d44e8, type: 3}
+  successAudio: {fileID: 8300000, guid: 6e16722105782d94d91109081779bdf3, type: 3}
   crashParticles: {fileID: 3954292087870182681}
   successParticles: {fileID: 6138113639648541573}
 --- !u!1 &3793881854640179662
