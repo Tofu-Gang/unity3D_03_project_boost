@@ -14,6 +14,7 @@ public class CollisionHandler : MonoBehaviour
     Movement movementScript;
 
     bool isTransitioning = false;
+    bool collisionsOn = true;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,10 @@ public class CollisionHandler : MonoBehaviour
                     SuccessSequence();
                     break;
                 default:
-                    CrashSequence();
+                    if (collisionsOn)
+                    {
+                        CrashSequence();
+                    }
                     break;
             }
         }
@@ -72,7 +76,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning = false;
     }
 
-    void LoadNextLevel()
+    public void LoadNextLevel()
     {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
@@ -84,5 +88,11 @@ public class CollisionHandler : MonoBehaviour
             SceneManager.LoadScene(0);
         }
         isTransitioning = false;
+    }
+
+    public void switchCollisionsOnOff()
+    {
+        collisionsOn = !collisionsOn;
+        Debug.Log("Collisions on: " + collisionsOn.ToString());
     }
 }
