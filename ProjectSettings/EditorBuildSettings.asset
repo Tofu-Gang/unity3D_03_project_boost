@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Over.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Under.unity
+    path: Assets/Scenes/Crystal Cave.unity
     guid: 845814267aa48bf47a5f5e4bc3a047ff
   m_configObjects: {}
